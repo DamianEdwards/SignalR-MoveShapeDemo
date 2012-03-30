@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>MoveShape Web</title>
+    <style>
+        html, body {
+            padding: 0; margin: 0;
+            width: 100%; height: 100%;
+            font-family: 'Segoe UI', Arial;
+        }
+        #shape {
+            width: 100px;
+            height: 100px;
+            background-color: #0094ff;
+            cursor: move;
+        }
+        #clientCount {
+            position: absolute;
+            top: 0;
+            right: 10px;
+            font-size: 72px;
+            color: #cdcdcd;
+        }
+    </style>
+</head>
+<body>
+    <div id="shape"></div>
+    <div id="clientCount"></div>
+    
+    <script type="text/javascript" src="../Scripts/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="../Scripts/jquery-ui-1.8.18.js"></script>
+    <script type="text/javascript" src="../Scripts/jquery.signalR.js"></script>
+    <script type="text/javascript" src="/signalr/hubs"></script>
+    <script type="text/javascript" src="MoveShape.js"></script>
+</body>
+</html>
