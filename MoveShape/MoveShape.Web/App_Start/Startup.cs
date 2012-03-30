@@ -10,10 +10,11 @@ namespace MoveShape.Web.App_Start
     {
         public static void Go()
         {
+            // Create an account on redistogo.com and put the details in here
             Global.DependencyResolver.UseRedis(
                 server: "cod.redistogo.com",
-                port: 9053,
-                password: "73e01e6bb0dff0d3136953917a6613a0",
+                port: 1234,
+                password: "password here",
                 eventKey: "Codemania.MoveShape");
         }
     }
