@@ -18,8 +18,8 @@ namespace MoveShape.Desktop
 
         private async void Go()
         {
-            var hubConnection = new HubConnection("http://localhost:1231/");
-            var hub = hubConnection.CreateProxy("MoveShape.Web.MoveShape.MoveShapeHub");
+            var hubConnection = new HubConnection("http://localhost:1235/");
+            var hub = hubConnection.CreateProxy("moveShape");
             
             hub.On<string, double, double>("shapeMoved", (cid, x, y) =>
                 {

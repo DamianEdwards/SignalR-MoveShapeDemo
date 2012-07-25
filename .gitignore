@@ -13,7 +13,7 @@ _ReSharper.*
 *.csproj.user
 *[Rr]e[Ss]harper.user
 _ReSharper.*/
-packages/*
+packages/
 Kudu.Services.Web/App_Data/*
 artifacts/*
 msbuild.log

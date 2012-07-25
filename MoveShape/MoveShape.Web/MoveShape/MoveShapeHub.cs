@@ -27,7 +27,7 @@ namespace MoveShape.Web.MoveShape
 
         public Task Reconnect(IEnumerable<string> groups)
         {
-            _connections.AddOrUpdate(Context.ConnectionId, null, (key, o) => o);
+            _connections.TryAdd(Context.ConnectionId, null);
             return Clients.clientCountChanged(_connections.Count);
         }
 

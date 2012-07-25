@@ -33,6 +33,8 @@ namespace MoveShape.Desktop
                 };
 
             element.MouseMove += (sender, e) => UpdateShapePosition(dragging, element, onDrag, canvas, offset, e);
+
+            element.Cursor = Cursors.SizeAll;
         }
 
         private static void UpdateShapePosition(bool dragging, FrameworkElement element, Action<double, double> onDrag, Canvas canvas, Point offset, MouseEventArgs e)
