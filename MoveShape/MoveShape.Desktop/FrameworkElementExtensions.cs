@@ -12,27 +12,29 @@ namespace MoveShape.Desktop
             var canvas = element.Parent as Canvas;
 
             if (canvas == null)
+            {
                 throw new InvalidOperationException("Element must be in a Canvas control");
+            }
 
             var dragging = false;
             var offset = new Point();
 
-            element.MouseLeftButtonDown += (sender, e) =>
-                {
-                    dragging = true;
-                    offset = e.GetPosition(element);
-                };
+            element.MouseLeftButtonDown += (_, e) =>
+            {
+                dragging = true;
+                offset = e.GetPosition(element);
+            };
 
-            element.MouseLeftButtonUp += (sender, e) => dragging = false;
-            canvas.LostFocus += (sender, e) => dragging = false;
+            element.MouseLeftButtonUp += (_, __) => dragging = false;
+            canvas.LostFocus += (_, __) => dragging = false;
 
-            canvas.MouseEnter += (sender, e) =>
-                {
-                    dragging = dragging && e.LeftButton == MouseButtonState.Pressed;
-                    UpdateShapePosition(dragging, element, onDrag, canvas, offset, e);
-                };
+            canvas.MouseEnter += (_, e) =>
+            {
+                dragging = dragging && e.LeftButton == MouseButtonState.Pressed;
+                UpdateShapePosition(dragging, element, onDrag, canvas, offset, e);
+            };
 
-            element.MouseMove += (sender, e) => UpdateShapePosition(dragging, element, onDrag, canvas, offset, e);
+            element.MouseMove += (_, e) => UpdateShapePosition(dragging, element, onDrag, canvas, offset, e);
 
             element.Cursor = Cursors.SizeAll;
         }
@@ -44,12 +46,16 @@ namespace MoveShape.Desktop
             var position = e.GetPosition(canvas);
             var left = position.X - offset.X;
             var top = position.Y - offset.Y;
-            if (left < 0) left = 0;
-            if (top < 0) top = 0;
+            left = left < 0 ? 0 : left;
+            top = top < 0 ? 0 : top;
             if (left + element.ActualWidth > canvas.ActualWidth)
+            {
                 left = canvas.ActualWidth - element.ActualWidth;
+            }
             if (top + element.ActualHeight > canvas.ActualHeight)
+            {
                 top = canvas.ActualHeight - element.ActualHeight;
+            }
             Canvas.SetLeft(element, left);
             Canvas.SetTop(element, top);
             if (onDrag != null)

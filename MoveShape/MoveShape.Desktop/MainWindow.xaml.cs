@@ -22,15 +22,16 @@ namespace MoveShape.Desktop
             var hub = hubConnection.CreateHubProxy("moveShape");
             
             hub.On<double, double>("shapeMoved", (x, y) =>
+                Dispatcher.InvokeAsync(() =>
                 {
-                    Dispatcher.InvokeAsync(() =>
-                    {
-                        Canvas.SetLeft(Shape, (Body.ActualWidth - Shape.ActualWidth) * x);
-                        Canvas.SetTop(Shape, (Body.ActualHeight - Shape.ActualHeight) * y);
-                    });
-                });
-
-            hub.On<int>("clientCountChanged", count => Dispatcher.InvokeAsync(() => ClientCount.Text = count.ToString()));
+                    Canvas.SetLeft(Shape, (Body.ActualWidth - Shape.ActualWidth) * x);
+                    Canvas.SetTop(Shape, (Body.ActualHeight - Shape.ActualHeight) * y);
+                })
+            );
+            
+            hub.On<int>("clientCountChanged", count =>
+                Dispatcher.InvokeAsync(() =>
+                    ClientCount.Text = count.ToString()));
 
             await hubConnection.Start();
             
@@ -40,7 +41,7 @@ namespace MoveShape.Desktop
                     top / (Body.ActualHeight - Shape.ActualHeight))
             );
 
-            Closing += (s, e) => hubConnection.Stop();
+            Closing += (_, __) => hubConnection.Stop();
         }
     }
 }
